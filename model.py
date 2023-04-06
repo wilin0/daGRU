@@ -53,7 +53,7 @@ class RNN(nn.Module):
         for i in range(self.num_layers):
             zeros = torch.zeros([batch, self.num_hidden[i], height, width])
             T_t.append(zeros)
-
+        print("T_t" + T_t.device)
         for t in range(self.total_length - 1):
 
             net = frames[:, t]

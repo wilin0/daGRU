@@ -41,6 +41,35 @@ class STGRUCell(nn.Module):
 
 class DualAttention(nn.Module):
 
+    def __init__(self, image_channel, filter_size, stride, width):
+        """
+        初始化函数
+        :param image_channel: 输入图片的通道数
+        :param filter_size: 卷积核的大小
+        :param stride: 卷积步长
+        :param width: 输入图片的宽和高，宽和高需要一样
+        """
+        super().__init__()
+        self.padding = filter_size // 2
+        self.c_attn_ = nn.Sequential(
+            nn.Conv2d(image_channel, image_channel, kernel_size=filter_size, stride=stride, padding=self.padding),
+            nn.LayerNorm([image_channel, width, width]),
+            nn.ReLU(),
+            nn.Conv2d(image_channel, image_channel, kernel_size=1, stride=1, padding=0),
+            # nn.LayerNorm([num_hidden, width, width]),
+            # nn.ReLU(),
+            # nn.Dropout2d(p=0.9)
+        )
+        self.s_attn_ = nn.Sequential(
+            nn.Conv2d(image_channel, image_channel, kernel_size=filter_size, stride=stride, padding=self.padding),
+            nn.LayerNorm([image_channel, width, width]),
+            nn.ReLU(),
+            nn.Conv2d(image_channel, image_channel, kernel_size=1, stride=1, padding=0),
+            # nn.LayerNorm([num_hidden, width, width]),
+            # nn.ReLU(),
+            # nn.Dropout2d(p=0.9)
+        )
+
     def attention_channel(self, in_query, in_keys, in_values):
         """
         在时间上的注意力机制
@@ -92,35 +121,6 @@ class DualAttention(nn.Module):
         attn = attn.reshape([batch, width, height, num_channels]).permute(0, 3, 1, 2)
 
         return attn
-
-    def __init__(self, image_channel, filter_size, stride, width):
-        """
-        初始化函数
-        :param image_channel: 输入图片的通道数
-        :param filter_size: 卷积核的大小
-        :param stride: 卷积步长
-        :param width: 输入图片的宽和高，宽和高需要一样
-        """
-        super().__init__()
-        self.padding = filter_size // 2
-        self.c_attn_ = nn.Sequential(
-            nn.Conv2d(image_channel, image_channel, kernel_size=filter_size, stride=stride, padding=self.padding),
-            nn.LayerNorm([image_channel, width, width]),
-            nn.ReLU(),
-            nn.Conv2d(image_channel, image_channel, kernel_size=1, stride=1, padding=0),
-            # nn.LayerNorm([num_hidden, width, width]),
-            # nn.ReLU(),
-            # nn.Dropout2d(p=0.9)
-        )
-        self.s_attn_ = nn.Sequential(
-            nn.Conv2d(image_channel, image_channel, kernel_size=filter_size, stride=stride, padding=self.padding),
-            nn.LayerNorm([image_channel, width, width]),
-            nn.ReLU(),
-            nn.Conv2d(image_channel, image_channel, kernel_size=1, stride=1, padding=0),
-            # nn.LayerNorm([num_hidden, width, width]),
-            # nn.ReLU(),
-            # nn.Dropout2d(p=0.9)
-        )
 
     def forward(self, in_query, in_keys, in_values):
 

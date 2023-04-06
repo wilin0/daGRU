@@ -58,6 +58,7 @@ class RNN(nn.Module):
         for t in range(self.total_length - 1):
 
             net = frames[:, t]
+            print(net.device)
             image_list.append(net)
             input_frm = torch.stack(image_list[t:])
             input_frm = input_frm.permute(1, 0, 2, 3, 4).contiguous()

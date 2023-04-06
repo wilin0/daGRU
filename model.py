@@ -51,7 +51,7 @@ class RNN(nn.Module):
         T_t = []
 
         for i in range(self.num_layers):
-            zeros = torch.zeros([batch, self.num_hidden[i], height, width]).to(self.configs.device)
+            zeros = torch.zeros([batch, self.num_hidden[i], height, width])
             T_t.append(zeros)
 
         for t in range(self.total_length - 1):

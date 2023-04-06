@@ -150,6 +150,8 @@ class attn_sum_fusion(nn.Module):
 
 
 def reshape_patch(img_tensor, patch_size):
+    # [batch, time, channel, height, width]
+    img_tensor = img_tensor.permute(0, 1, 3, 4, 2).contiguous()
     assert 5 == img_tensor.ndim
     img_np = img_tensor.detach().cpu().numpy()
     batch_size = np.shape(img_np)[0]
@@ -157,7 +159,6 @@ def reshape_patch(img_tensor, patch_size):
     img_height = np.shape(img_np)[2]
     img_width = np.shape(img_np)[3]
     num_channels = np.shape(img_np)[4]
-    print(batch_size, seq_length, img_height, num_channels)
     a = np.reshape(img_np, [batch_size, seq_length,
                                 img_height//patch_size, patch_size,
                                 img_width//patch_size, patch_size,
@@ -168,11 +169,13 @@ def reshape_patch(img_tensor, patch_size):
                                   img_width//patch_size,
                                   patch_size*patch_size*num_channels])
     patch_tensor = torch.from_numpy(patch_np)
+    patch_tensor = patch_tensor.permute(0, 1, 4, 2, 3).contiguous()
 
     return patch_tensor
 
 
 def reshape_patch_back(patch_tensor, patch_size):
+    patch_tensor = patch_tensor.permute(0, 1, 3, 4, 2).contiguous()
     assert 5 == patch_tensor.ndim
     patch_np = patch_tensor.detach().cpu().numpy()
     batch_size = np.shape(patch_np)[0]
@@ -191,5 +194,6 @@ def reshape_patch_back(patch_tensor, patch_size):
                                 patch_width * patch_size,
                                 img_channels])
     img_tensor = torch.from_numpy(img_np)
+    img_tensor = img_tensor.permute(0, 1, 4, 2, 3).contiguous()
     return img_tensor
 

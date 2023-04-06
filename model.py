@@ -33,9 +33,11 @@ class RNN(nn.Module):
 
     def forward(self, x):
 
+        # [batch, time, channel, height, width]
         x = reshape_patch(x, self.patch_size)
-        # [batch, time, height, width, channel] -> [batch, time, channel, height, width]
-        frames = x.permute(0, 1, 4, 2, 3).contiguous()
+        # [batch, time, height, width, channel] -> [batch, time, channel, height, width] [1 10 1 64 64]
+        # frames = x.permute(0, 1, 4, 2, 3).contiguous()
+        frames = x.contiguous()
 
         batch = frames.shape[0]
         height = frames.shape[3]
@@ -71,9 +73,8 @@ class RNN(nn.Module):
             attn = self.dec(T_t[-1], S_t)
             next_frames.append(attn)
 
-        # [length, batch, channel, height, width] -> [batch, length, height, width, channel]
-        next_frames = torch.stack(next_frames, dim=0).permute(1, 0, 3, 4, 2).contiguous()
-        next_frames = (next_frames, self.patch_size)
+        next_frames = torch.stack(next_frames, dim=0).contiguous()
+        next_frames = reshape_patch_back(next_frames, self.patch_size)
 
         return next_frames
 

@@ -1,8 +1,8 @@
 import argparse
-from exp import Exp
-
 import warnings
 warnings.filterwarnings('ignore')
+from exp import Exp
+
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -15,7 +15,7 @@ def create_parser():
     parser.add_argument('--seed', default=1, type=int)
 
     # dataset parameters
-    parser.add_argument('--batch_size', default=16, type=int, help='Batch size')
+    parser.add_argument('--batch_size', default=1, type=int, help='Batch size')
     parser.add_argument('--val_batch_size', default=16, type=int, help='Batch size')
     parser.add_argument('--data_root', default='./data/')
     parser.add_argument('--dataname', default='mmnist', choices=['mmnist', 'taxibj'])

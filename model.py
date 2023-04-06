@@ -15,6 +15,8 @@ class RNN(nn.Module):
         self.input_length = input_length
         self.width = in_shape[2] // patch_size
         self.patch_size = patch_size
+        self.filter_size = filter_size
+        self.stride = stride
         cell_list = []
 
         self.enc = DualAttention(self.img_channel, self.filter_size, self.stride, self.width)

@@ -8,7 +8,7 @@ class STGRUCell(nn.Module):
         super(STGRUCell, self).__init__()
 
         self.num_hidden = num_hidden
-        self.padding = (filter_size[0] // 2, filter_size[1] // 2)
+        self.padding = (filter_size // 2, filter_size // 2)
         self._forget_bias = 1.0
         self.conv_t = nn.Sequential(
             nn.Conv2d(in_channel, 4 * num_hidden, kernel_size=filter_size, stride=stride, padding=self.padding,

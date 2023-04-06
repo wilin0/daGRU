@@ -151,7 +151,7 @@ class attn_sum_fusion(nn.Module):
 
 def reshape_patch(img_tensor, patch_size):
     assert 5 == img_tensor.ndim
-    img_np = img_tensor.numpy()
+    img_np = img_tensor.detach().cpu().numpy()
     batch_size = np.shape(img_np)[0]
     seq_length = np.shape(img_np)[1]
     img_height = np.shape(img_np)[2]
@@ -173,7 +173,7 @@ def reshape_patch(img_tensor, patch_size):
 
 def reshape_patch_back(patch_tensor, patch_size):
     assert 5 == patch_tensor.ndim
-    patch_np = patch_tensor.numpy()
+    patch_np = patch_tensor.detach().cpu().numpy()
     batch_size = np.shape(patch_np)[0]
     seq_length = np.shape(patch_np)[1]
     patch_height = np.shape(patch_np)[2]

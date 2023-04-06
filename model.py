@@ -4,7 +4,7 @@ from modules import STGRUCell, DualAttention, attn_sum_fusion, reshape_patch_bac
 
 
 class RNN(nn.Module):
-    def __init__(self, in_shape, num_layers, num_hidden, time_stride, input_length, filter_size, stride, patch_size):
+    def __init__(self, in_shape, num_layers, num_hidden, time_stride, input_length, filter_size, stride, patch_size, device):
         super(RNN, self).__init__()
 
         self.img_channel = in_shape[1] * patch_size * patch_size
@@ -17,6 +17,7 @@ class RNN(nn.Module):
         self.patch_size = patch_size
         self.filter_size = filter_size
         self.stride = stride
+        self.device = device
         cell_list = []
 
         self.enc = DualAttention(self.img_channel, self.filter_size, self.stride, self.width)
@@ -34,7 +35,7 @@ class RNN(nn.Module):
     def forward(self, x):
 
         # [batch, time, channel, height, width]
-        x = reshape_patch(x, self.patch_size)
+        x = reshape_patch(x, self.patch_size).to(self.device)
         # [batch, time, height, width, channel] -> [batch, time, channel, height, width] [1 10 1 64 64]
         # frames = x.permute(0, 1, 4, 2, 3).contiguous()
         frames = x.contiguous()
@@ -51,9 +52,9 @@ class RNN(nn.Module):
         T_t = []
 
         for i in range(self.num_layers):
-            zeros = torch.zeros([batch, self.num_hidden[i], height, width])
+            zeros = torch.zeros([batch, self.num_hidden[i], height, width]).to(self.device)
             T_t.append(zeros)
-        print(zeros.device)
+
         for t in range(self.total_length - 1):
 
             net = frames[:, t]

@@ -62,7 +62,7 @@ class Exp:
     def _build_model(self):
         args = self.args
         self.model = RNN(tuple(args.in_shape), args.num_layers, args.num_hidden, args.time_stride,
-                         args.input_length, args.filter_size, args.stride, args.patch_size).to(self.device)
+                         args.input_length, args.filter_size, args.stride, args.patch_size, self.device).to(self.device)
 
     def _get_data(self):
         config = self.args.__dict__

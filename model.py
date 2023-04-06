@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from modules import STGRUCell, DualAttention, attn_sum_fusion, reshape_patch_back, reshape_patch
+from modules import STGRUCell, DualAttention, attn_sum_fusion
 
 
 class RNN(nn.Module):
@@ -20,22 +20,22 @@ class RNN(nn.Module):
         self.device = device
         cell_list = []
 
-        self.enc = DualAttention(self.img_channel, self.filter_size, self.stride, self.width)
-        self.dec = attn_sum_fusion(self.img_channel)
+        self.enc = DualAttention(self.img_channel, num_hidden[0], self.filter_size, self.stride, self.width)
+        self.dec = attn_sum_fusion(self.num_hidden[-1], self.img_channel)
 
-        self.merge_t = nn.Conv2d(self.num_hidden[-1] * 2, self.num_hidden[-1], kernel_size=1, stride=1, padding=0)
+        self.merge_t = nn.Conv2d(self.num_hidden[0] * 2, self.num_hidden[0], kernel_size=1, stride=1, padding=0)
 
         for i in range(num_layers):
-            in_channel = self.img_channel if i == 0 else num_hidden[i - 1]
+            # in_channel = self.img_channel if i == 0 else self.num_hidden[i - 1]
+            in_channel = self.num_hidden[0] if i == 0 else self.num_hidden[i - 1]
             cell_list.append(
-                STGRUCell(in_channel, num_hidden[i], self.width, self.width, filter_size, stride)
+                STGRUCell(in_channel, self.num_hidden[i], self.width, self.width, filter_size, stride)
             )
         self.cell_list = nn.ModuleList(cell_list)
 
     def forward(self, x):
 
         # [batch, time, channel, height, width]
-        x = reshape_patch(x, self.patch_size).to(self.device)
         # [batch, time, height, width, channel] -> [batch, time, channel, height, width] [1 10 1 64 64]
         # frames = x.permute(0, 1, 4, 2, 3).contiguous()
         frames = x.contiguous()
@@ -46,7 +46,7 @@ class RNN(nn.Module):
 
         image_list = []
         for time_step in range(self.time_stride):
-            image_list.append(torch.zeros([batch, self.img_channel, height, width]))
+            image_list.append(torch.zeros([batch, self.img_channel, height, width]).to(self.device))
 
         next_frames = []
         T_t = []
@@ -56,9 +56,10 @@ class RNN(nn.Module):
             T_t.append(zeros)
 
         for t in range(self.total_length - 1):
-
-            net = frames[:, t]
-            print(net.device)
+            if t < self.input_length:
+                net = frames[:, t]
+            else:
+                net = next_frames[t - 1]
             image_list.append(net)
             input_frm = torch.stack(image_list[t:])
             input_frm = input_frm.permute(1, 0, 2, 3, 4).contiguous()
@@ -70,13 +71,12 @@ class RNN(nn.Module):
             T_t[0], S_t = self.cell_list[0](T_t[0], s_attn)
 
             for i in range(1, self.num_layers):
-                T_t[i], S_t = self.cell_list[i](T_t[i - 1], S_t)
+                T_t[i], S_t = self.cell_list[i](T_t[i], S_t)
 
             attn = self.dec(T_t[-1], S_t)
             next_frames.append(attn)
 
         next_frames = torch.stack(next_frames, dim=0).contiguous()
-        next_frames = reshape_patch_back(next_frames, self.patch_size)
 
         return next_frames
 

@@ -97,8 +97,11 @@ class Exp:
 
             for batch_x, batch_y in train_pbar:
                 self.optimizer.zero_grad()
+
+                batch_x = reshape_patch(batch_x, self.args.patch_size)
                 batch_x, batch_y = batch_x.to(self.device), batch_y.to(self.device)
                 pred_y = self.model(batch_x)
+                pred_y = reshape_patch_back(pred_y, self.args.patch_size)
 
                 loss = self.criterion(pred_y, batch_y)
                 train_loss.append(loss.item())

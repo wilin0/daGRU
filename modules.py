@@ -126,7 +126,7 @@ class DualAttention(nn.Module):
 
         spatial_attn = self.attention_spatial(in_query, in_keys, in_values)
         channel_attn = self.attention_channel(in_query, in_keys, in_values)
-        print("spatial_attn" + spatial_attn.device)
+        print(spatial_attn.device)
         s_attn = self.s_attn_(spatial_attn + in_query)
         c_attn = self.c_attn_(channel_attn + in_query)
 

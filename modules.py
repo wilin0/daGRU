@@ -151,39 +151,44 @@ class attn_sum_fusion(nn.Module):
 
 def reshape_patch(img_tensor, patch_size):
     assert 5 == img_tensor.ndim
-    batch_size = np.shape(img_tensor)[0]
-    seq_length = np.shape(img_tensor)[1]
-    img_height = np.shape(img_tensor)[2]
-    img_width = np.shape(img_tensor)[3]
-    num_channels = np.shape(img_tensor)[4]
-    a = np.reshape(img_tensor, [batch_size, seq_length,
+    img_np = img_tensor.numpy()
+    batch_size = np.shape(img_np)[0]
+    seq_length = np.shape(img_np)[1]
+    img_height = np.shape(img_np)[2]
+    img_width = np.shape(img_np)[3]
+    num_channels = np.shape(img_np)[4]
+    a = np.reshape(img_np, [batch_size, seq_length,
                                 img_height//patch_size, patch_size,
                                 img_width//patch_size, patch_size,
                                 num_channels])
     b = np.transpose(a, [0,1,2,4,3,5,6])
-    patch_tensor = np.reshape(b, [batch_size, seq_length,
+    patch_np = np.reshape(b, [batch_size, seq_length,
                                   img_height//patch_size,
                                   img_width//patch_size,
                                   patch_size*patch_size*num_channels])
+    patch_tensor = torch.from_numpy(patch_np)
+
     return patch_tensor
 
 
 def reshape_patch_back(patch_tensor, patch_size):
     assert 5 == patch_tensor.ndim
-    batch_size = np.shape(patch_tensor)[0]
-    seq_length = np.shape(patch_tensor)[1]
-    patch_height = np.shape(patch_tensor)[2]
-    patch_width = np.shape(patch_tensor)[3]
-    channels = np.shape(patch_tensor)[4]
+    patch_np = patch_tensor.numpy()
+    batch_size = np.shape(patch_np)[0]
+    seq_length = np.shape(patch_np)[1]
+    patch_height = np.shape(patch_np)[2]
+    patch_width = np.shape(patch_np)[3]
+    channels = np.shape(patch_np)[4]
     img_channels = channels // (patch_size*patch_size)
-    a = np.reshape(patch_tensor, [batch_size, seq_length,
+    a = np.reshape(patch_np, [batch_size, seq_length,
                                   patch_height, patch_width,
                                   patch_size, patch_size,
                                   img_channels])
     b = np.transpose(a, [0,1,2,4,3,5,6])
-    img_tensor = np.reshape(b, [batch_size, seq_length,
+    img_np = np.reshape(b, [batch_size, seq_length,
                                 patch_height * patch_size,
                                 patch_width * patch_size,
                                 img_channels])
+    img_tensor = torch.from_numpy(img_np)
     return img_tensor
 

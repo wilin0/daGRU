@@ -59,7 +59,7 @@ class RNN(nn.Module):
             if t < self.input_length:
                 net = frames[:, t]
             else:
-                net = next_frames[t - 1]
+                net = attn
             image_list.append(net)
             input_frm = torch.stack(image_list[t:])
             input_frm = input_frm.permute(1, 0, 2, 3, 4).contiguous()
@@ -74,9 +74,12 @@ class RNN(nn.Module):
                 T_t[i], S_t = self.cell_list[i](T_t[i], S_t)
 
             attn = self.dec(T_t[-1], S_t)
-            next_frames.append(attn)
 
-        next_frames = torch.stack(next_frames, dim=0).contiguous()
+            # 0-9输入，9-18输出
+            if t >= self.input_length - 1:
+                next_frames.append(attn)
+
+        next_frames = torch.stack(next_frames, dim=0).permute((1, 0, 2, 3, 4)).contiguous()
 
         return next_frames
 

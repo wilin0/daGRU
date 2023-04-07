@@ -101,9 +101,10 @@ class Exp:
                 batch_x = reshape_patch(batch_x, self.args.patch_size)
                 batch_x, batch_y = batch_x.to(self.device), batch_y.to(self.device)
                 pred_y = self.model(batch_x)
-                pred_y = reshape_patch_back(pred_y, self.args.patch_size)
+                pred_y = reshape_patch_back(pred_y, self.args.patch_size).to(self.device)
 
                 loss = self.criterion(pred_y, batch_y)
+                loss.requires_grad_(True)
                 train_loss.append(loss.item())
                 train_pbar.set_description('train loss: {:.4f}'.format(loss.item()))
 

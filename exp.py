@@ -58,6 +58,9 @@ class Exp:
         self._get_data()
         # build the model
         self._build_model()
+        if self.args.pretrained:
+            best_model_path = self.path + '/' + 'checkpoint.pth'
+            self.model.load_state_dict(torch.load(best_model_path))
 
     def _build_model(self):
         args = self.args

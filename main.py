@@ -13,6 +13,7 @@ def create_parser():
     parser.add_argument('--use_gpu', default=True, type=bool)
     parser.add_argument('--gpu', default=0, type=int)
     parser.add_argument('--seed', default=1, type=int)
+    parser.add_argument('--pretrained', default=True, type=bool)
 
     # dataset parameters
     parser.add_argument('--batch_size', default=16, type=int, help='Batch size')

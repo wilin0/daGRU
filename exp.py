@@ -135,8 +135,10 @@ class Exp:
             if i * batch_x.shape[0] > 1000:
                 break
 
+            batch_x = reshape_patch(batch_x, self.args.patch_size)
             batch_x, batch_y = batch_x.to(self.device), batch_y.to(self.device)
             pred_y = self.model(batch_x)
+            pred_y = reshape_patch_back(pred_y, self.args.patch_size).to(self.device)
             list(map(lambda data, lst: lst.append(data.detach().cpu().numpy()), [
                  pred_y, batch_y], [preds_lst, trues_lst]))
 
@@ -157,7 +159,9 @@ class Exp:
         self.model.eval()
         inputs_lst, trues_lst, preds_lst = [], [], []
         for batch_x, batch_y in self.test_loader:
+            batch_x = reshape_patch(batch_x, self.args.patch_size)
             pred_y = self.model(batch_x.to(self.device))
+            pred_y = reshape_patch_back(pred_y, self.args.patch_size)
             list(map(lambda data, lst: lst.append(data.detach().cpu().numpy()), [
                  batch_x, batch_y, pred_y], [inputs_lst, trues_lst, preds_lst]))
 

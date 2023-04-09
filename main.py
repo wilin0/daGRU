@@ -16,7 +16,7 @@ def create_parser():
     parser.add_argument('--pretrained', default=False, type=bool)
 
     # dataset parameters
-    parser.add_argument('--batch_size', default=16, type=int, help='Batch size')
+    parser.add_argument('--batch_size', default=32, type=int, help='Batch size')
     parser.add_argument('--val_batch_size', default=16, type=int, help='Batch size')
     parser.add_argument('--data_root', default='./data/')
     parser.add_argument('--dataname', default='mmnist', choices=['mmnist', 'taxibj'])

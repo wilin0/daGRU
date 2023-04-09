@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from modules import STGRUCell, DualAttention, attn_sum_fusion
+from modules import STGRUCell, DualAttention, attn_sum_fusion, Inception
 
 
 class RNN(nn.Module):
@@ -21,7 +21,7 @@ class RNN(nn.Module):
         cell_list = []
 
         self.enc = DualAttention(self.img_channel, num_hidden[0], self.filter_size, self.stride, self.width)
-        self.dec = attn_sum_fusion(self.num_hidden[-1], self.img_channel)
+        self.dec = attn_sum_fusion(self.img_channel, self.img_channel)
 
         self.merge_t = nn.Conv2d(self.num_hidden[0] * 2, self.num_hidden[0], kernel_size=1, stride=1, padding=0)
 
@@ -32,6 +32,48 @@ class RNN(nn.Module):
                 STGRUCell(in_channel, self.num_hidden[i], self.width, self.width, filter_size, stride)
             )
         self.cell_list = nn.ModuleList(cell_list)
+
+        # spatial inception
+        self.N_T = num_layers
+        incep_ker = [3, 5, 7, 11]
+        groups = 8
+        enc_layers_s = [Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups)]
+        for i in range(1, self.N_T - 1):
+            enc_layers_s.append(Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups))
+        enc_layers_s.append(Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups))
+
+        dec_layers_s = [Inception(2 * self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups)]
+        for i in range(1, self.N_T - 1):
+            dec_layers_s.append(
+                Inception(2 * self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups))
+        dec_layers_s.append(Inception(2 * self.num_hidden[0], self.num_hidden[0] // 2, self.img_channel, incep_ker=incep_ker, groups=groups))
+
+        self.enc_inception_s = nn.Sequential(*enc_layers_s)
+        self.dec_inception_s = nn.Sequential(*dec_layers_s)
+
+        # channel inception
+        enc_layers_c = [Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker,
+                                  groups=groups)]
+        for i in range(1, self.N_T - 1):
+            enc_layers_c.append(
+                Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker,
+                          groups=groups))
+        enc_layers_c.append(
+            Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker,
+                      groups=groups))
+
+        dec_layers_c = [Inception(2 * self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker,
+                                  groups=groups)]
+        for i in range(1, self.N_T - 1):
+            dec_layers_c.append(
+                Inception(2 * self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker,
+                          groups=groups))
+        dec_layers_c.append(
+            Inception(2 * self.num_hidden[0], self.num_hidden[0] // 2, self.img_channel, incep_ker=incep_ker,
+                      groups=groups))
+
+        self.enc_inception_c = nn.Sequential(*enc_layers_c)
+        self.dec_inception_c = nn.Sequential(*dec_layers_c)
 
     def forward(self, x):
 
@@ -60,11 +102,21 @@ class RNN(nn.Module):
                 net = frames[:, t]
             else:
                 net = attn
-            image_list.append(net)
             input_frm = torch.stack(image_list[t:])
+            image_list.append(net)
             input_frm = input_frm.permute(1, 0, 2, 3, 4).contiguous()
 
             s_attn, t_attn = self.enc(net, input_frm, input_frm)
+            # 加入inception encoder
+            skip_s = []
+            for i in range(self.N_T):
+                s_attn = self.enc_inception_s[i](s_attn)
+                skip_s.append(s_attn)
+
+            skip_t = []
+            for i in range(self.N_T):
+                t_attn = self.enc_inception_c[i](t_attn)
+                skip_t.append(t_attn)
 
             T_t[0] = self.merge_t(torch.cat([T_t[0], t_attn], dim=1))
 
@@ -73,7 +125,14 @@ class RNN(nn.Module):
             for i in range(1, self.num_layers):
                 T_t[i], S_t = self.cell_list[i](T_t[i], S_t)
 
-            attn = self.dec(T_t[-1], S_t)
+            z_s = S_t
+            z_t = T_t[-1]
+            # 加入inception decoder和残差
+            for i in range(self.N_T):
+                z_s = self.dec_inception_s[i](torch.cat([z_s, skip_s[-i]], dim=1))
+                z_t = self.dec_inception_c[i](torch.cat([z_t, skip_t[-i]], dim=1))
+
+            attn = self.dec(z_t, z_s)
 
             # 0-9输入，9-18输出
             if t >= self.input_length - 1:

@@ -76,7 +76,7 @@ class Exp:
         self.optimizer = torch.optim.Adam(
             self.model.parameters(), lr=self.args.lr)
         self.scheduler = torch.optim.lr_scheduler.OneCycleLR(
-            self.optimizer, max_lr=self.args.lr, steps_per_epoch=len(self.train_loader), epochs=self.args.epochs, last_epoch=len(self.train_loader) * self.args.pretrained_epoch)
+            self.optimizer, max_lr=self.args.lr, steps_per_epoch=len(self.train_loader), epochs=self.args.epochs)
         return self.optimizer
 
     def _select_criterion(self):

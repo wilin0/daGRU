@@ -6,7 +6,7 @@ import torch
 import pickle
 import logging
 import numpy as np
-from model import RNN
+from model_3dconv import RNN
 from tqdm import tqdm
 from API import *
 from utils import *

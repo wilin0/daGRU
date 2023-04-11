@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from modules import STGRUCell, DualAttention, attn_sum_fusion, Inception
+from modules import STGRUCell, attn_sum_fusion, Inception, Enc_3dconv
 
 
 class RNN(nn.Module):
@@ -20,7 +20,9 @@ class RNN(nn.Module):
         self.device = device
         cell_list = []
 
-        self.enc = DualAttention(self.img_channel, num_hidden[0], self.filter_size, self.stride, self.width)
+        # self.enc = DualAttention(self.img_channel, num_hidden[0], self.filter_size, self.stride, self.width)
+        self.enc = Enc_3dconv(self.img_channel, num_hidden[0], self.time_stride)
+
         self.dec = attn_sum_fusion(self.img_channel, self.img_channel)
 
         self.merge_t = nn.Conv2d(self.num_hidden[0] * 2, self.num_hidden[0], kernel_size=1, stride=1, padding=0)
@@ -87,7 +89,7 @@ class RNN(nn.Module):
         width = frames.shape[4]
 
         image_list = []
-        for time_step in range(self.time_stride):
+        for time_step in range(self.time_stride - 1):
             image_list.append(torch.zeros([batch, self.img_channel, height, width]).to(self.device))
 
         next_frames = []
@@ -102,12 +104,13 @@ class RNN(nn.Module):
                 net = frames[:, t]
             else:
                 net = attn
-            input_frm = torch.stack(image_list[t:])
             image_list.append(net)
-            # [time, batch, channel, height, width]->[batch, time, channel, height, width]
-            input_frm = input_frm.permute(1, 0, 2, 3, 4).contiguous()
+            input_frm = torch.stack(image_list[t:])
+            # [time, batch, channel, height, width]
+            input_frm = input_frm.permute(1, 2, 0, 3, 4).contiguous()
 
-            s_attn, t_attn = self.enc(net, input_frm, input_frm)
+            # s_attn, t_attn = self.enc(net, input_frm, input_frm)
+            s_attn, t_attn = self.enc(input_frm)
             # 加入inception encoder
             skip_s = []
             for i in range(self.N_T):

@@ -106,7 +106,9 @@ class DualAttention(nn.Module):
         :param in_values: attention V
         :return: 注意力机制的输出
         """
+        # [batch, channel, height, width]
         q_shape = in_query.shape
+        # [batch, time, channel, height, width]
         k_shape = in_keys.shape
         batch = q_shape[0]
         num_channels = q_shape[1]
@@ -184,3 +186,36 @@ class Inception(nn.Module):
             y += layer(x)
         return y
 
+
+class Enc_3dconv(nn.Module):
+    def __init__(self, image_channel, num_hidden, time_stride):
+        super(Enc_3dconv, self).__init__()
+        self.image_channel = image_channel
+        self.num_hidden = num_hidden
+        self.time = time_stride
+        s_encoder3d = nn.Sequential()
+        s_encoder3d.add_module(name='encoder3d_s_conv',
+                               module=nn.Conv3d(in_channels=self.image_channel,
+                                                out_channels=self.num_hidden,
+                                                stride=1,
+                                                padding=0,
+                                                kernel_size=(self.time, 1, 1)))
+        s_encoder3d.add_module(name='relu3d_s',
+                               module=nn.LeakyReLU(0.2))
+        self.s_encoder3d = s_encoder3d
+
+        t_encoder3d = nn.Sequential()
+        t_encoder3d.add_module(name='encoder3d_s_conv',
+                               module=nn.Conv3d(in_channels=self.image_channel,
+                                                out_channels=self.num_hidden,
+                                                stride=1,
+                                                padding=0,
+                                                kernel_size=(self.time, 1, 1)))
+        t_encoder3d.add_module(name='relu3d_s',
+                               module=nn.LeakyReLU(0.2))
+        self.t_encoder3d = t_encoder3d
+
+    def forward(self, images):
+        image_s_feature = self.s_encoder3d(images).squeeze(dim=2)
+        image_t_feature = self.t_encoder3d(images).squeeze(dim=2)
+        return image_s_feature, image_t_feature

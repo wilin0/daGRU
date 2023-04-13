@@ -65,7 +65,8 @@ class Exp:
     def _build_model(self):
         args = self.args
         self.model = RNN(tuple(args.in_shape), args.num_layers, args.num_hidden, args.time_stride,
-                         args.input_length, args.filter_size, args.stride, args.patch_size, self.device).to(self.device)
+                         args.input_length, args.filter_size, args.stride, args.patch_size, self.device,
+                         args.num_inception).to(self.device)
 
     def _get_data(self):
         config = self.args.__dict__
@@ -73,10 +74,10 @@ class Exp:
         self.vali_loader = self.test_loader if self.vali_loader is None else self.vali_loader
 
     def _select_optimizer(self):
-        self.optimizer = torch.optim.Adam(
-            self.model.parameters(), lr=self.args.lr)
+        self.optimizer = torch.optim.Adam([{'params': self.model.parameters()}], lr=self.args.lr)
         self.scheduler = torch.optim.lr_scheduler.OneCycleLR(
             self.optimizer, max_lr=self.args.lr, steps_per_epoch=len(self.train_loader), epochs=self.args.epochs)
+        self.scheduler.last_epoch = self.args.pretrained_epoch
         return self.optimizer
 
     def _select_criterion(self):
@@ -93,7 +94,7 @@ class Exp:
         config = args.__dict__
         recorder = Recorder(verbose=True)
 
-        for epoch in range(config['epochs']):
+        for epoch in range(self.args.pretrained_epoch, config['epochs']):
             train_loss = []
             self.model.train()
             train_pbar = tqdm(self.train_loader)
@@ -160,6 +161,7 @@ class Exp:
         return total_loss
 
     def test(self, args):
+        torch.cuda.empty_cache()
         self.model.eval()
         inputs_lst, trues_lst, preds_lst = [], [], []
         for batch_x, batch_y in self.test_loader:

@@ -4,7 +4,7 @@ from modules import STGRUCell, attn_sum_fusion, Inception, Enc_3dconv
 
 
 class RNN(nn.Module):
-    def __init__(self, in_shape, num_layers, num_hidden, time_stride, input_length, filter_size, stride, patch_size, device):
+    def __init__(self, in_shape, num_layers, num_hidden, time_stride, input_length, filter_size, stride, patch_size, device, num_inception):
         super(RNN, self).__init__()
 
         self.img_channel = in_shape[1] * patch_size * patch_size
@@ -17,6 +17,7 @@ class RNN(nn.Module):
         self.patch_size = patch_size
         self.filter_size = filter_size
         self.stride = stride
+        self.num_inception = num_inception
         self.device = device
         cell_list = []
 
@@ -36,7 +37,7 @@ class RNN(nn.Module):
         self.cell_list = nn.ModuleList(cell_list)
 
         # spatial inception
-        self.N_T = num_layers
+        self.N_T = self.num_inception
         incep_ker = [3, 5, 7, 11]
         groups = 8
         enc_layers_s = [Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups)]

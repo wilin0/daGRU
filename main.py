@@ -14,7 +14,6 @@ def create_parser():
     parser.add_argument('--gpu', default=0, type=int)
     parser.add_argument('--seed', default=1, type=int)
     parser.add_argument('--pretrained', default=False, type=bool)
-    parser.add_argument('--pretrained_epoch', default=0, type=int)
 
     # dataset parameters
     parser.add_argument('--batch_size', default=16, type=int, help='Batch size')
@@ -32,9 +31,11 @@ def create_parser():
     parser.add_argument('--input_length', default=10, type=int)
     parser.add_argument('--num_layers', default=4, type=int)
     parser.add_argument('--patch_size', default=4, type=int)
+    parser.add_argument('--num_inception', default=4, type=int)
 
     # Training parameters
-    parser.add_argument('--epochs', default=81, type=int)
+    parser.add_argument('--epochs', default=200, type=int)
+    parser.add_argument('--pretrained_epoch', default=68, type=int)
     parser.add_argument('--log_step', default=1, type=int)
     parser.add_argument('--lr', default=0.01, type=float, help='Learning rate')
     return parser

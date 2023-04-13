@@ -2,9 +2,9 @@ import numpy as np
 import torch
 
 class Recorder:
-    def __init__(self, verbose=False, delta=0):
+    def __init__(self, best_score=None, verbose=False, delta=0):
         self.verbose = verbose
-        self.best_score = None
+        self.best_score = best_score
         self.val_loss_min = np.Inf
         self.delta = delta
 

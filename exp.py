@@ -92,7 +92,7 @@ class Exp:
 
     def train(self, args):
         config = args.__dict__
-        recorder = Recorder(verbose=True)
+        recorder = Recorder(best_score=self.args.best_score, verbose=True)
 
         for epoch in range(self.args.pretrained_epoch, config['epochs']):
             train_loss = []

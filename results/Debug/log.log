@@ -1,0 +1,344 @@
+2023-04-12 17:52:04,543 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	False	
+pretrained_epoch: 	0	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+epochs: 	81	
+log_step: 	1	
+lr: 	0.01	
+2023-04-12 18:16:13,508 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	False	
+pretrained_epoch: 	0	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+epochs: 	81	
+log_step: 	1	
+lr: 	0.01	
+2023-04-12 18:19:17,311 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	False	
+pretrained_epoch: 	0	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+epochs: 	81	
+log_step: 	1	
+lr: 	0.01	
+2023-04-12 18:38:18,383 - vali mse:153.1356, mae:382.6073, ssim:0.1114, psnr:29.9369
+2023-04-12 18:38:18,663 - Epoch: 1 | Train Loss: 0.1148 Vali Loss: 0.0374
+
+2023-04-12 18:57:27,415 - vali mse:137.7766, mae:369.2030, ssim:0.2558, psnr:31.0884
+2023-04-12 18:57:27,439 - Epoch: 2 | Train Loss: 0.0355 Vali Loss: 0.0336
+
+2023-04-12 19:16:47,782 - vali mse:125.1122, mae:334.0468, ssim:0.3599, psnr:31.9420
+2023-04-12 19:16:47,805 - Epoch: 3 | Train Loss: 0.0319 Vali Loss: 0.0305
+
+2023-04-12 19:36:05,556 - vali mse:112.8228, mae:305.3991, ssim:0.4161, psnr:32.3927
+2023-04-12 19:36:05,587 - Epoch: 4 | Train Loss: 0.0284 Vali Loss: 0.0275
+
+2023-04-12 19:55:47,930 - vali mse:107.8531, mae:291.2797, ssim:0.4697, psnr:32.9348
+2023-04-12 19:55:47,959 - Epoch: 5 | Train Loss: 0.0265 Vali Loss: 0.0263
+
+2023-04-12 20:15:09,468 - vali mse:104.7283, mae:286.3014, ssim:0.4945, psnr:32.9803
+2023-04-12 20:15:09,494 - Epoch: 6 | Train Loss: 0.0255 Vali Loss: 0.0256
+
+2023-04-12 20:33:59,957 - vali mse:97.2483, mae:258.8885, ssim:0.5445, psnr:33.9355
+2023-04-12 20:33:59,985 - Epoch: 7 | Train Loss: 0.0243 Vali Loss: 0.0237
+
+2023-04-12 20:52:22,362 - vali mse:95.7935, mae:256.5984, ssim:0.5525, psnr:33.8769
+2023-04-12 20:52:22,384 - Epoch: 8 | Train Loss: 0.0231 Vali Loss: 0.0234
+
+2023-04-12 21:11:01,660 - vali mse:87.0889, mae:239.0933, ssim:0.5964, psnr:33.9015
+2023-04-12 21:11:01,665 - Epoch: 9 | Train Loss: 0.0219 Vali Loss: 0.0213
+
+2023-04-12 21:29:37,680 - vali mse:83.1601, mae:232.5107, ssim:0.6307, psnr:34.6776
+2023-04-12 21:29:37,707 - Epoch: 10 | Train Loss: 0.0210 Vali Loss: 0.0203
+
+2023-04-12 21:47:18,079 - vali mse:82.5938, mae:229.8637, ssim:0.6002, psnr:33.6169
+2023-04-12 21:47:18,084 - Epoch: 11 | Train Loss: 0.0201 Vali Loss: 0.0202
+
+2023-04-12 22:05:37,575 - vali mse:82.4366, mae:222.9262, ssim:0.6335, psnr:34.9863
+2023-04-12 22:05:37,593 - Epoch: 12 | Train Loss: 0.0196 Vali Loss: 0.0201
+
+2023-04-12 22:24:34,159 - vali mse:80.3975, mae:218.0429, ssim:0.6434, psnr:35.0917
+2023-04-12 22:24:34,165 - Epoch: 13 | Train Loss: 0.0191 Vali Loss: 0.0196
+
+2023-04-12 22:43:27,881 - vali mse:75.7158, mae:211.5194, ssim:0.6594, psnr:34.9331
+2023-04-12 22:43:27,892 - Epoch: 14 | Train Loss: 0.0188 Vali Loss: 0.0185
+
+2023-04-12 23:02:41,125 - vali mse:76.3645, mae:206.1300, ssim:0.6566, psnr:35.0906
+2023-04-12 23:02:41,138 - Epoch: 15 | Train Loss: 0.0185 Vali Loss: 0.0186
+
+2023-04-12 23:21:58,288 - vali mse:76.9829, mae:209.0838, ssim:0.6544, psnr:34.6426
+2023-04-12 23:21:58,315 - Epoch: 16 | Train Loss: 0.0181 Vali Loss: 0.0188
+
+2023-04-12 23:40:54,746 - vali mse:73.2284, mae:196.6542, ssim:0.6813, psnr:35.3473
+2023-04-12 23:40:54,773 - Epoch: 17 | Train Loss: 0.0180 Vali Loss: 0.0179
+
+2023-04-12 23:59:37,127 - vali mse:70.9781, mae:202.9491, ssim:0.6924, psnr:35.4068
+2023-04-12 23:59:37,154 - Epoch: 18 | Train Loss: 0.0177 Vali Loss: 0.0173
+
+2023-04-13 00:18:30,374 - vali mse:71.8236, mae:191.4496, ssim:0.6888, psnr:35.2780
+2023-04-13 00:18:30,383 - Epoch: 19 | Train Loss: 0.0175 Vali Loss: 0.0175
+
+2023-04-13 00:37:27,323 - vali mse:71.1257, mae:193.1982, ssim:0.6912, psnr:35.3297
+2023-04-13 00:37:27,346 - Epoch: 20 | Train Loss: 0.0172 Vali Loss: 0.0174
+
+2023-04-13 00:56:14,622 - vali mse:70.6888, mae:187.9943, ssim:0.6980, psnr:35.7298
+2023-04-13 00:56:14,627 - Epoch: 21 | Train Loss: 0.0171 Vali Loss: 0.0173
+
+2023-04-13 01:15:05,704 - vali mse:69.7804, mae:188.5583, ssim:0.6919, psnr:35.3767
+2023-04-13 01:15:05,721 - Epoch: 22 | Train Loss: 0.0169 Vali Loss: 0.0170
+
+2023-04-13 01:34:06,656 - vali mse:66.2581, mae:184.8057, ssim:0.7195, psnr:35.8184
+2023-04-13 01:34:06,662 - Epoch: 23 | Train Loss: 0.0167 Vali Loss: 0.0162
+
+2023-04-13 01:53:06,198 - vali mse:67.7935, mae:184.5448, ssim:0.7094, psnr:35.8241
+2023-04-13 01:53:06,219 - Epoch: 24 | Train Loss: 0.0165 Vali Loss: 0.0166
+
+2023-04-13 02:11:54,023 - vali mse:68.7599, mae:183.8179, ssim:0.7058, psnr:35.7758
+2023-04-13 02:11:54,030 - Epoch: 25 | Train Loss: 0.0163 Vali Loss: 0.0168
+
+2023-04-13 02:30:46,921 - vali mse:64.9791, mae:176.4204, ssim:0.7274, psnr:36.0092
+2023-04-13 02:30:46,931 - Epoch: 26 | Train Loss: 0.0160 Vali Loss: 0.0159
+
+2023-04-13 02:49:44,747 - vali mse:64.1376, mae:180.1681, ssim:0.7262, psnr:35.7972
+2023-04-13 02:49:44,799 - Epoch: 27 | Train Loss: 0.0159 Vali Loss: 0.0157
+
+2023-04-13 03:08:41,547 - vali mse:62.9743, mae:171.7902, ssim:0.7266, psnr:35.6691
+2023-04-13 03:08:41,567 - Epoch: 28 | Train Loss: 0.0156 Vali Loss: 0.0154
+
+2023-04-13 03:27:54,924 - vali mse:62.0370, mae:171.5417, ssim:0.7276, psnr:35.6120
+2023-04-13 03:27:54,999 - Epoch: 29 | Train Loss: 0.0155 Vali Loss: 0.0151
+
+2023-04-13 03:47:12,421 - vali mse:64.4038, mae:182.3253, ssim:0.7196, psnr:35.6922
+2023-04-13 03:47:12,432 - Epoch: 30 | Train Loss: 0.0153 Vali Loss: 0.0157
+
+2023-04-13 04:06:02,705 - vali mse:59.9579, mae:164.6191, ssim:0.7466, psnr:36.1362
+2023-04-13 04:06:02,710 - Epoch: 31 | Train Loss: 0.0152 Vali Loss: 0.0146
+
+2023-04-13 04:24:47,527 - vali mse:61.4405, mae:171.2314, ssim:0.7401, psnr:35.9966
+2023-04-13 04:24:47,556 - Epoch: 32 | Train Loss: 0.0151 Vali Loss: 0.0150
+
+2023-04-13 04:43:29,411 - vali mse:61.8047, mae:168.9864, ssim:0.7461, psnr:36.3003
+2023-04-13 04:43:29,418 - Epoch: 33 | Train Loss: 0.0150 Vali Loss: 0.0151
+
+2023-04-13 05:02:37,531 - vali mse:60.2309, mae:169.8098, ssim:0.7416, psnr:35.9873
+2023-04-13 05:02:37,543 - Epoch: 34 | Train Loss: 0.0148 Vali Loss: 0.0147
+
+2023-04-13 05:21:26,309 - vali mse:60.4940, mae:169.8090, ssim:0.7479, psnr:36.1900
+2023-04-13 05:21:26,316 - Epoch: 35 | Train Loss: 0.0147 Vali Loss: 0.0148
+
+2023-04-13 05:40:17,087 - vali mse:59.7578, mae:167.3582, ssim:0.7461, psnr:35.9827
+2023-04-13 05:40:17,097 - Epoch: 36 | Train Loss: 0.0144 Vali Loss: 0.0146
+
+2023-04-13 05:58:49,841 - vali mse:58.2363, mae:170.1612, ssim:0.7450, psnr:35.6315
+2023-04-13 05:58:49,852 - Epoch: 37 | Train Loss: 0.0143 Vali Loss: 0.0142
+
+2023-04-13 06:17:42,305 - vali mse:58.3190, mae:164.3950, ssim:0.7507, psnr:35.9613
+2023-04-13 06:17:42,326 - Epoch: 38 | Train Loss: 0.0143 Vali Loss: 0.0142
+
+2023-04-13 06:36:13,033 - vali mse:58.6080, mae:168.6400, ssim:0.7376, psnr:35.6196
+2023-04-13 06:36:13,039 - Epoch: 39 | Train Loss: 0.0141 Vali Loss: 0.0143
+
+2023-04-13 06:54:48,906 - vali mse:57.0283, mae:158.9973, ssim:0.7604, psnr:36.2503
+2023-04-13 06:54:48,911 - Epoch: 40 | Train Loss: 0.0140 Vali Loss: 0.0139
+
+2023-04-13 07:12:41,430 - vali mse:56.0843, mae:160.6602, ssim:0.7676, psnr:36.3455
+2023-04-13 07:12:41,440 - Epoch: 41 | Train Loss: 0.0139 Vali Loss: 0.0137
+
+2023-04-13 07:30:43,253 - vali mse:56.1206, mae:163.3929, ssim:0.7552, psnr:35.7308
+2023-04-13 07:30:43,273 - Epoch: 42 | Train Loss: 0.0138 Vali Loss: 0.0137
+
+2023-04-13 07:48:43,090 - vali mse:56.3934, mae:158.5664, ssim:0.7654, psnr:36.2405
+2023-04-13 07:48:43,110 - Epoch: 43 | Train Loss: 0.0137 Vali Loss: 0.0138
+
+2023-04-13 08:06:41,363 - vali mse:55.2600, mae:160.6798, ssim:0.7615, psnr:35.9369
+2023-04-13 08:06:41,393 - Epoch: 44 | Train Loss: 0.0136 Vali Loss: 0.0135
+
+2023-04-13 08:24:56,518 - vali mse:55.6860, mae:163.1645, ssim:0.7473, psnr:35.6062
+2023-04-13 08:24:56,532 - Epoch: 45 | Train Loss: 0.0134 Vali Loss: 0.0136
+
+2023-04-13 08:42:55,262 - vali mse:54.2320, mae:153.9603, ssim:0.7760, psnr:36.3303
+2023-04-13 08:42:55,278 - Epoch: 46 | Train Loss: 0.0133 Vali Loss: 0.0132
+
+2023-04-13 09:00:45,975 - vali mse:54.2637, mae:156.9624, ssim:0.7697, psnr:36.1318
+2023-04-13 09:00:45,987 - Epoch: 47 | Train Loss: 0.0131 Vali Loss: 0.0132
+
+2023-04-13 09:18:36,167 - vali mse:52.4893, mae:152.6620, ssim:0.7757, psnr:36.2515
+2023-04-13 09:18:36,174 - Epoch: 48 | Train Loss: 0.0131 Vali Loss: 0.0128
+
+2023-04-13 09:36:24,517 - vali mse:53.0735, mae:153.3088, ssim:0.7798, psnr:36.2272
+2023-04-13 09:36:24,522 - Epoch: 49 | Train Loss: 0.0129 Vali Loss: 0.0130
+
+2023-04-13 09:54:26,545 - vali mse:53.1764, mae:154.9966, ssim:0.7758, psnr:36.1329
+2023-04-13 09:54:26,573 - Epoch: 50 | Train Loss: 0.0129 Vali Loss: 0.0130
+
+2023-04-13 10:12:37,696 - vali mse:52.9515, mae:155.5448, ssim:0.7680, psnr:35.9085
+2023-04-13 10:12:37,712 - Epoch: 51 | Train Loss: 0.0127 Vali Loss: 0.0129
+
+2023-04-13 10:30:59,081 - vali mse:52.0552, mae:156.5313, ssim:0.7718, psnr:35.9826
+2023-04-13 10:30:59,106 - Epoch: 52 | Train Loss: 0.0127 Vali Loss: 0.0127
+
+2023-04-13 10:49:26,681 - vali mse:51.6581, mae:151.8439, ssim:0.7821, psnr:36.3085
+2023-04-13 10:49:26,686 - Epoch: 53 | Train Loss: 0.0125 Vali Loss: 0.0126
+
+2023-04-13 11:07:49,075 - vali mse:50.7519, mae:149.7629, ssim:0.7797, psnr:36.1362
+2023-04-13 11:07:49,087 - Epoch: 54 | Train Loss: 0.0123 Vali Loss: 0.0124
+
+2023-04-13 11:26:21,668 - vali mse:50.8226, mae:151.0646, ssim:0.7833, psnr:36.1818
+2023-04-13 11:26:21,696 - Epoch: 55 | Train Loss: 0.0123 Vali Loss: 0.0124
+
+2023-04-13 11:45:13,897 - vali mse:49.6006, mae:143.0746, ssim:0.7976, psnr:36.7003
+2023-04-13 11:45:13,927 - Epoch: 56 | Train Loss: 0.0122 Vali Loss: 0.0121
+
+2023-04-13 12:04:59,592 - vali mse:50.6188, mae:147.8862, ssim:0.7834, psnr:36.2937
+2023-04-13 12:04:59,607 - Epoch: 57 | Train Loss: 0.0121 Vali Loss: 0.0124
+
+2023-04-13 12:25:19,798 - vali mse:49.2808, mae:146.7095, ssim:0.7924, psnr:36.4298
+2023-04-13 12:25:19,815 - Epoch: 58 | Train Loss: 0.0120 Vali Loss: 0.0120
+
+2023-04-13 12:44:42,751 - vali mse:48.4892, mae:143.7789, ssim:0.7919, psnr:36.3435
+2023-04-13 12:44:42,766 - Epoch: 59 | Train Loss: 0.0119 Vali Loss: 0.0118
+
+2023-04-13 13:02:52,393 - vali mse:48.0237, mae:143.0483, ssim:0.7943, psnr:36.3820
+2023-04-13 13:02:52,398 - Epoch: 60 | Train Loss: 0.0118 Vali Loss: 0.0117
+
+2023-04-13 13:20:51,482 - vali mse:47.8754, mae:143.2832, ssim:0.7956, psnr:36.2937
+2023-04-13 13:20:51,490 - Epoch: 61 | Train Loss: 0.0117 Vali Loss: 0.0117
+
+2023-04-13 13:38:52,322 - vali mse:47.3949, mae:142.5676, ssim:0.7961, psnr:36.4115
+2023-04-13 13:38:52,329 - Epoch: 62 | Train Loss: 0.0115 Vali Loss: 0.0116
+
+2023-04-13 13:57:35,442 - vali mse:47.1262, mae:144.7522, ssim:0.8019, psnr:36.5550
+2023-04-13 13:57:35,509 - Epoch: 63 | Train Loss: 0.0116 Vali Loss: 0.0115
+
+2023-04-13 14:18:21,578 - vali mse:47.0182, mae:142.6686, ssim:0.7957, psnr:36.2660
+2023-04-13 14:18:21,611 - Epoch: 64 | Train Loss: 0.0114 Vali Loss: 0.0115
+
+2023-04-13 14:39:32,187 - vali mse:46.6095, mae:139.0317, ssim:0.8030, psnr:36.5175
+2023-04-13 14:39:32,211 - Epoch: 65 | Train Loss: 0.0113 Vali Loss: 0.0114
+
+2023-04-13 15:00:52,515 - vali mse:45.8760, mae:137.0058, ssim:0.8080, psnr:36.5758
+2023-04-13 15:00:52,535 - Epoch: 66 | Train Loss: 0.0113 Vali Loss: 0.0112
+
+2023-04-13 15:21:57,441 - vali mse:45.8051, mae:137.5811, ssim:0.8114, psnr:36.6957
+2023-04-13 15:21:57,447 - Epoch: 67 | Train Loss: 0.0111 Vali Loss: 0.0112
+
+2023-04-13 15:41:27,627 - vali mse:45.2269, mae:134.4921, ssim:0.8134, psnr:36.7518
+2023-04-13 15:41:27,632 - Epoch: 68 | Train Loss: 0.0111 Vali Loss: 0.0110
+
+2023-04-13 16:00:45,866 - vali mse:45.2571, mae:134.3952, ssim:0.8153, psnr:36.8272
+2023-04-13 16:00:45,872 - Epoch: 69 | Train Loss: 0.0111 Vali Loss: 0.0110
+
+2023-04-13 16:19:47,071 - vali mse:44.9586, mae:134.1079, ssim:0.8134, psnr:36.7019
+2023-04-13 16:19:47,079 - Epoch: 70 | Train Loss: 0.0110 Vali Loss: 0.0110
+
+2023-04-13 16:39:02,960 - vali mse:44.8446, mae:133.7285, ssim:0.8152, psnr:36.7918
+2023-04-13 16:39:02,978 - Epoch: 71 | Train Loss: 0.0109 Vali Loss: 0.0109
+
+2023-04-13 16:58:21,535 - vali mse:44.5712, mae:133.8536, ssim:0.8132, psnr:36.6195
+2023-04-13 16:58:21,553 - Epoch: 72 | Train Loss: 0.0109 Vali Loss: 0.0109
+
+2023-04-13 17:17:45,778 - vali mse:44.2977, mae:132.5692, ssim:0.8169, psnr:36.7396
+2023-04-13 17:17:45,786 - Epoch: 73 | Train Loss: 0.0109 Vali Loss: 0.0108
+
+2023-04-13 17:37:04,169 - vali mse:44.3050, mae:131.6137, ssim:0.8176, psnr:36.7712
+2023-04-13 17:37:04,176 - Epoch: 74 | Train Loss: 0.0108 Vali Loss: 0.0108
+
+2023-04-13 17:56:22,747 - vali mse:44.0291, mae:131.0154, ssim:0.8196, psnr:36.7955
+2023-04-13 17:56:22,778 - Epoch: 75 | Train Loss: 0.0108 Vali Loss: 0.0107
+
+2023-04-13 18:15:35,828 - vali mse:43.9576, mae:130.5205, ssim:0.8202, psnr:36.8685
+2023-04-13 18:15:35,833 - Epoch: 76 | Train Loss: 0.0107 Vali Loss: 0.0107
+
+2023-04-13 18:34:47,445 - vali mse:43.8335, mae:130.4467, ssim:0.8205, psnr:36.8298
+2023-04-13 18:34:47,473 - Epoch: 77 | Train Loss: 0.0106 Vali Loss: 0.0107
+
+2023-04-13 18:53:58,620 - vali mse:43.8484, mae:130.4159, ssim:0.8208, psnr:36.8695
+2023-04-13 18:53:58,634 - Epoch: 78 | Train Loss: 0.0106 Vali Loss: 0.0107
+
+2023-04-13 19:13:10,044 - vali mse:43.7821, mae:130.4343, ssim:0.8205, psnr:36.8350
+2023-04-13 19:13:10,049 - Epoch: 79 | Train Loss: 0.0106 Vali Loss: 0.0107
+
+2023-04-13 19:32:48,013 - vali mse:43.7494, mae:130.2660, ssim:0.8201, psnr:36.8119
+2023-04-13 19:32:48,022 - Epoch: 80 | Train Loss: 0.0107 Vali Loss: 0.0107
+
+2023-04-13 19:52:17,894 - vali mse:43.7419, mae:130.2258, ssim:0.8203, psnr:36.8204
+2023-04-13 19:52:17,905 - Epoch: 81 | Train Loss: 0.0107 Vali Loss: 0.0107
+
+2023-04-13 20:03:49,846 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	False	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	68	
+log_step: 	1	
+lr: 	0.01	

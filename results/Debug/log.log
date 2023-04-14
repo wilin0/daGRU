@@ -342,3 +342,408 @@ epochs: 	200
 pretrained_epoch: 	68	
 log_step: 	1	
 lr: 	0.01	
+2023-04-13 23:54:13,419 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-13 23:54:37,486 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-13 23:55:20,769 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-13 23:56:13,388 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-14 14:16:08,640 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.003	
+best_score: 	0.0107	
+2023-04-14 14:19:17,404 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.003	
+best_score: 	0.0107	
+2023-04-14 14:20:16,104 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.003	
+best_score: 	0.0107	
+2023-04-14 14:49:05,660 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	200	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.003	
+best_score: 	0.0107	
+2023-04-14 15:08:11,456 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	81	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-14 15:08:45,858 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	81	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-14 15:09:44,640 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	81	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-14 15:10:44,822 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	81	
+pretrained_epoch: 	81	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-14 15:11:39,015 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	81	
+pretrained_epoch: 	0	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-14 15:12:48,068 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	16	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	81	
+pretrained_epoch: 	0	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	
+2023-04-14 15:13:47,692 - 
+device: 	cuda	
+res_dir: 	./results	
+ex_name: 	Debug	
+use_gpu: 	True	
+gpu: 	0	
+seed: 	1	
+pretrained: 	True	
+batch_size: 	1	
+val_batch_size: 	16	
+data_root: 	./data/	
+dataname: 	mmnist	
+num_workers: 	8	
+in_shape: 	[20, 1, 64, 64]	
+num_hidden: 	[64, 64, 64, 64]	
+filter_size: 	5	
+stride: 	1	
+time_stride: 	3	
+input_length: 	10	
+num_layers: 	4	
+patch_size: 	4	
+num_inception: 	4	
+epochs: 	81	
+pretrained_epoch: 	0	
+log_step: 	1	
+lr: 	0.01	
+best_score: 	0.0107	

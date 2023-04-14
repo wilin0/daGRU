@@ -113,8 +113,8 @@ class Exp:
 
                 loss.backward()
                 self.optimizer.step()
-                self.scheduler.step()
 
+            self.scheduler.step()
             train_loss = np.average(train_loss)
 
             if epoch % args.log_step == 0:

@@ -37,7 +37,7 @@ def create_parser():
     parser.add_argument('--epochs', default=200, type=int)
     parser.add_argument('--pretrained_epoch', default=81, type=int)
     parser.add_argument('--log_step', default=1, type=int)
-    parser.add_argument('--lr', default=0.01, type=float, help='Learning rate')
+    parser.add_argument('--lr', default=0.003, type=float, help='Learning rate')
     parser.add_argument('--best_score', default=0.0107, type=float)
     return parser
 

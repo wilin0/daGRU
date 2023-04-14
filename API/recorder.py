@@ -4,7 +4,10 @@ import torch
 class Recorder:
     def __init__(self, best_score=None, verbose=False, delta=0):
         self.verbose = verbose
-        self.best_score = best_score
+        if best_score is not None:
+            self.best_score = -best_score
+        else:
+            self.best_score = best_score
         self.val_loss_min = np.Inf
         self.delta = delta
 

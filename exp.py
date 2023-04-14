@@ -109,7 +109,7 @@ class Exp:
 
                 loss = self.criterion(pred_y, batch_y)
                 train_loss.append(loss.item())
-                train_pbar.set_description('train loss: {:.4f}; lr: {:.4f}'.format(loss.item(), self.scheduler.get_last_lr()))
+                train_pbar.set_description('train loss: {:.4f}; lr: {lr}'.format(loss.item(), lr=self.scheduler.get_last_lr()))
 
                 loss.backward()
                 self.optimizer.step()

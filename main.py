@@ -16,7 +16,7 @@ def create_parser():
     parser.add_argument('--pretrained', default=True, type=bool)
 
     # dataset parameters
-    parser.add_argument('--batch_size', default=16, type=int, help='Batch size')
+    parser.add_argument('--batch_size', default=1, type=int, help='Batch size')
     parser.add_argument('--val_batch_size', default=16, type=int, help='Batch size')
     parser.add_argument('--data_root', default='./data/')
     parser.add_argument('--dataname', default='mmnist', choices=['mmnist', 'taxibj'])
@@ -34,10 +34,10 @@ def create_parser():
     parser.add_argument('--num_inception', default=4, type=int)
 
     # Training parameters
-    parser.add_argument('--epochs', default=200, type=int)
-    parser.add_argument('--pretrained_epoch', default=81, type=int)
+    parser.add_argument('--epochs', default=81, type=int)
+    parser.add_argument('--pretrained_epoch', default=0, type=int)
     parser.add_argument('--log_step', default=1, type=int)
-    parser.add_argument('--lr', default=0.003, type=float, help='Learning rate')
+    parser.add_argument('--lr', default=0.01, type=float, help='Learning rate')
     parser.add_argument('--best_score', default=0.0107, type=float)
     return parser
 
@@ -49,5 +49,5 @@ if __name__ == '__main__':
     exp = Exp(args)
     print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>  start <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     exp.train(args)
-    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>> testing <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-    mse = exp.test(args)
+    # print('>>>>>>>>>>>>>>>>>>>>>>>>>>>> testing <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+    # mse = exp.test(args)

@@ -74,9 +74,9 @@ class Exp:
         self.vali_loader = self.test_loader if self.vali_loader is None else self.vali_loader
 
     def _select_optimizer(self):
-        self.optimizer = torch.optim.Adam([{'params': self.model.parameters(), 'initial_lr': self.args.lr, 'max_lr': self.args.lr, 'min_lr':self.args.lr, 'max_momentum': 0.95, 'base_momentum': 0.85}], lr=self.args.lr)
+        self.optimizer = torch.optim.Adam([{'params': self.model.parameters()}], lr=self.args.lr)
         self.scheduler = torch.optim.lr_scheduler.OneCycleLR(
-            self.optimizer, max_lr=self.args.lr, steps_per_epoch=len(self.train_loader), epochs=self.args.epochs, last_epoch=self.args.pretrained_epoch * len(self.train_loader))
+            self.optimizer, max_lr=self.args.lr, steps_per_epoch=len(self.train_loader), epochs=self.args.epochs)
         return self.optimizer
 
     def _select_criterion(self):
@@ -95,39 +95,40 @@ class Exp:
 
         for epoch in range(self.args.pretrained_epoch, config['epochs']):
             train_loss = []
-            self.model.train()
+            # self.model.train()
             train_pbar = tqdm(self.train_loader)
 
             for batch_x, batch_y in train_pbar:
                 self.optimizer.zero_grad()
 
-                batch_x = reshape_patch(batch_x, self.args.patch_size)
-                batch_y = reshape_patch(batch_y, self.args.patch_size)
-                batch_x, batch_y = batch_x.to(self.device), batch_y.to(self.device)
-                pred_y = self.model(batch_x)
-                # pred_y = reshape_patch_back(pred_y, self.args.patch_size).to(self.device)
+                # batch_x = reshape_patch(batch_x, self.args.patch_size)
+                # batch_y = reshape_patch(batch_y, self.args.patch_size)
+                # batch_x, batch_y = batch_x.to(self.device), batch_y.to(self.device)
+                # pred_y = self.model(batch_x)
+                # # pred_y = reshape_patch_back(pred_y, self.args.patch_size).to(self.device)
+                #
+                # loss = self.criterion(pred_y, batch_y)
+                # train_loss.append(loss.item())
+                # train_pbar.set_description('train loss: {:.4f}; lr: {lr}'.format(loss.item(), lr=self.scheduler.get_last_lr()))
 
-                loss = self.criterion(pred_y, batch_y)
-                train_loss.append(loss.item())
-                train_pbar.set_description('train loss: {:.4f}; lr: {lr}'.format(loss.item(), lr=self.scheduler.get_last_lr()))
-
-                loss.backward()
+                # loss.backward()
                 self.optimizer.step()
                 self.scheduler.step()
+                print(self.scheduler.get_last_lr())
 
-            train_loss = np.average(train_loss)
+            # train_loss = np.average(train_loss)
+            #
+            # if epoch % args.log_step == 0:
+            #     with torch.no_grad():
+            #         vali_loss = self.vali(self.vali_loader)
+            #         if epoch % (args.log_step * 100) == 0:
+            #             self._save(name=str(epoch))
+            #     print_log("Epoch: {0} | Train Loss: {1:.4f} Vali Loss: {2:.4f}\n".format(
+            #         epoch + 1, train_loss, vali_loss))
+            #     recorder(vali_loss, self.model, self.path)
 
-            if epoch % args.log_step == 0:
-                with torch.no_grad():
-                    vali_loss = self.vali(self.vali_loader)
-                    if epoch % (args.log_step * 100) == 0:
-                        self._save(name=str(epoch))
-                print_log("Epoch: {0} | Train Loss: {1:.4f} Vali Loss: {2:.4f}\n".format(
-                    epoch + 1, train_loss, vali_loss))
-                recorder(vali_loss, self.model, self.path)
-
-        best_model_path = self.path + '/' + 'checkpoint.pth'
-        self.model.load_state_dict(torch.load(best_model_path))
+        # best_model_path = self.path + '/' + 'checkpoint.pth'
+        # self.model.load_state_dict(torch.load(best_model_path))
         return self.model
 
     def vali(self, vali_loader):

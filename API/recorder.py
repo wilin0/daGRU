@@ -6,6 +6,8 @@ class Recorder:
         self.verbose = verbose
         if best_score is not None and pretrained:
             self.best_score = -best_score
+        else:
+            self.best_score = None
         self.val_loss_min = np.Inf
         self.delta = delta
 

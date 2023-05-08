@@ -39,7 +39,7 @@ class RNN(nn.Module):
         self.N_T = self.num_inception
         incep_ker = [3, 5, 7, 11]
         groups = 8
-        enc_layers_s = [Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups)]
+        enc_layers_s = [Inception(self.img_channel, self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups)]
         for i in range(1, self.N_T - 1):
             enc_layers_s.append(Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups))
         enc_layers_s.append(Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups))
@@ -111,6 +111,7 @@ class RNN(nn.Module):
 
             B, T, C, H, W = input_frm.shape
             s_attn = input_frm.reshape(B*T, C, H, W)
+            print(s_attn.shape)
             t_attn = s_attn
             # 加入inception encoder
             skip_s = []

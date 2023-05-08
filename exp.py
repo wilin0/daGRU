@@ -6,7 +6,7 @@ import torch
 import pickle
 import logging
 import numpy as np
-from model_3dconv import RNN
+from model import RNN
 from tqdm import tqdm
 from API import *
 from utils import *
@@ -76,7 +76,7 @@ class Exp:
     def _select_optimizer(self):
         self.optimizer = torch.optim.Adam([{'params': self.model.parameters()}], lr=self.args.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(
-            self.optimizer, step_size=10, gamma=0.5)
+            self.optimizer, step_size=5, gamma=0.5)
         return self.optimizer
 
     def _select_criterion(self):
@@ -91,7 +91,7 @@ class Exp:
 
     def train(self, args):
         config = args.__dict__
-        recorder = Recorder(best_score=self.args.best_score, verbose=True)
+        recorder = Recorder(pretrained=self.args.pretrained, best_score=self.args.best_score, verbose=True)
 
         for epoch in range(self.args.pretrained_epoch, config['epochs']):
             train_loss = []

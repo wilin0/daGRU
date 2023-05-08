@@ -135,6 +135,78 @@ class DualAttention(nn.Module):
         return s_attn, c_attn
 
 
+class attention_channel(nn.Module):
+
+    def __init__(self, image_channel, num_hidden, filter_size, stride, width):
+        super().__init__()
+        self.padding = filter_size // 2
+        self.num_hidden = num_hidden
+        self.c_attn_ = nn.Sequential(
+            nn.Conv2d(image_channel, image_channel, kernel_size=filter_size, stride=stride, padding=self.padding),
+            nn.LayerNorm([image_channel, width, width]),
+            nn.ReLU(),
+            nn.Conv2d(image_channel, self.num_hidden, kernel_size=1, stride=1, padding=0),
+            # nn.LayerNorm([num_hidden, width, width]),
+            # nn.ReLU(),
+            # nn.Dropout2d(p=0.9)
+        )
+
+    def forward(self, in_query, in_keys, in_values):
+        q_shape = in_query.shape
+        k_shape = in_keys.shape
+        batch = q_shape[0]
+        num_channels = q_shape[1]
+        width = q_shape[2]
+        height = q_shape[3]
+        length = k_shape[1]
+        query = in_query.reshape([batch, num_channels, -1])
+        key = in_keys.reshape([batch, -1, height * width]).permute((0, 2, 1))
+        value = in_values.reshape([batch, -1, height * width]).permute((0, 2, 1))
+        attn = torch.matmul(query, key)
+        attn = torch.nn.Softmax(dim=2)(attn)
+        attn = torch.matmul(attn, value.permute(0, 2, 1))
+        attn = attn.reshape([batch, num_channels, width, height])
+        c_attn = self.c_attn_(attn + in_query)
+        return c_attn
+
+
+class attention_spatial(nn.Module):
+
+    def __init__(self, image_channel, num_hidden, filter_size, stride, width):
+        super().__init__()
+        self.padding = filter_size // 2
+        self.num_hidden = num_hidden
+        self.s_attn_ = nn.Sequential(
+            nn.Conv2d(image_channel, image_channel, kernel_size=filter_size, stride=stride, padding=self.padding),
+            nn.LayerNorm([image_channel, width, width]),
+            nn.ReLU(),
+            nn.Conv2d(image_channel, self.num_hidden, kernel_size=1, stride=1, padding=0),
+            # nn.LayerNorm([num_hidden, width, width]),
+            # nn.ReLU(),
+            # nn.Dropout2d(p=0.9)
+        )
+
+    def forward(self, in_query, in_keys, in_values):
+        q_shape = in_query.shape
+        # [batch, time, channel, height, width]
+        k_shape = in_keys.shape
+        batch = q_shape[0]
+        num_channels = q_shape[1]
+        width = q_shape[2]
+        height = q_shape[3]
+        length = k_shape[1]
+        query = in_query.reshape([batch, num_channels, -1]).permute((0, 2, 1))
+        key = in_keys.permute((0, 1, 3, 4, 2)).reshape([batch, -1, num_channels])
+        value = in_values.permute((0, 1, 3, 4, 2)).reshape([batch, -1, num_channels])
+        attn = torch.matmul(query, key.permute(0, 2, 1))
+        attn = torch.nn.Softmax(dim=2)(attn)
+        attn = torch.matmul(attn, value)
+        attn = attn.reshape([batch, width, height, num_channels]).permute(0, 3, 1, 2)
+        s_attn = self.s_attn_(attn + in_query)
+
+        return s_attn
+
+
 class attn_sum_fusion(nn.Module):
 
     def __init__(self, in_channel, image_channel):

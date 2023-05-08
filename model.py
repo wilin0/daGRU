@@ -110,7 +110,6 @@ class RNN(nn.Module):
 
             B, T, C, H, W = input_frm.shape
             s_attn = input_frm.reshape(B*T, C, H, W)
-            print(s_attn.shape)
             t_attn = s_attn
             # 加入inception encoder
             skip_s = []

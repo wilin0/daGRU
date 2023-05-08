@@ -117,13 +117,13 @@ class RNN(nn.Module):
             skip_s = []
             for i in range(self.N_T):
                 s_attn = self.enc_inception_s[i](s_attn)
-                s_img = s_attn.reshape(B, T, C, H, W)
+                s_img = s_attn.reshape(B, T, self.num_hidden[0], H, W)
                 skip_s.append(s_img[:, -1])
 
             skip_t = []
             for i in range(self.N_T):
                 t_attn = self.enc_inception_c[i](t_attn)
-                t_img = t_attn.reshape(B, T, C, H, W)
+                t_img = t_attn.reshape(B, T, self.num_hidden[0], H, W)
                 skip_t.append(t_img[:, -1])
 
             s_attn = self.enc_s(net, input_frm, input_frm)

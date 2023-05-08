@@ -54,8 +54,7 @@ class RNN(nn.Module):
         self.dec_inception_s = nn.Sequential(*dec_layers_s)
 
         # channel inception
-        enc_layers_c = [Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker,
-                                  groups=groups)]
+        enc_layers_c = [Inception(self.img_channel, self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker, groups=groups)]
         for i in range(1, self.N_T - 1):
             enc_layers_c.append(
                 Inception(self.num_hidden[0], self.num_hidden[0] // 2, self.num_hidden[0], incep_ker=incep_ker,

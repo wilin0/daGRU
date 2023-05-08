@@ -109,18 +109,21 @@ class RNN(nn.Module):
             # [time, batch, channel, height, width]->[batch, time, channel, height, width]
             input_frm = input_frm.permute(1, 0, 2, 3, 4).contiguous()
 
-            s_attn = input_frm
-            t_attn = input_frm
+            B, T, C, H, W = input_frm.shape
+            s_attn = input_frm.reshape(B*T, C, H, W)
+            t_attn = s_attn
             # 加入inception encoder
             skip_s = []
             for i in range(self.N_T):
                 s_attn = self.enc_inception_s[i](s_attn)
-                skip_s.append(s_attn)
+                s_img = s_attn.reshape(B, T, C, H, W)
+                skip_s.append(s_img[:, -1])
 
             skip_t = []
             for i in range(self.N_T):
                 t_attn = self.enc_inception_c[i](t_attn)
-                skip_t.append(t_attn)
+                t_img = t_attn.reshape(B, T, C, H, W)
+                skip_t.append(t_img[:, -1])
 
             s_attn = self.enc_s(net, input_frm, input_frm)
             t_attn = self.enc_c(net, input_frm, input_frm)

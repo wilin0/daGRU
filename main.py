@@ -9,11 +9,11 @@ def create_parser():
     # Set-up parameters
     parser.add_argument('--device', default='cuda', type=str, help='Name of device to use for tensor computations (cuda/cpu)')
     parser.add_argument('--res_dir', default='./results', type=str)
-    parser.add_argument('--ex_name', default='Debug3D', type=str)
+    parser.add_argument('--ex_name', default='Debug', type=str)
     parser.add_argument('--use_gpu', default=True, type=bool)
     parser.add_argument('--gpu', default=0, type=int)
     parser.add_argument('--seed', default=1, type=int)
-    parser.add_argument('--pretrained', default=False, type=bool)
+    parser.add_argument('--pretrained', default=True, type=bool)
 
     # dataset parameters
     parser.add_argument('--batch_size', default=16, type=int, help='Batch size')
@@ -37,8 +37,8 @@ def create_parser():
     parser.add_argument('--epochs', default=200, type=int)
     parser.add_argument('--pretrained_epoch', default=0, type=int)
     parser.add_argument('--log_step', default=1, type=int)
-    parser.add_argument('--lr', default=0.001, type=float, help='Learning rate')
-    parser.add_argument('--best_score', default=None, type=float)
+    parser.add_argument('--lr', default=0.0001, type=float, help='Learning rate')
+    parser.add_argument('--best_score', default=0.0146, type=float)
     return parser
 
 
